@@ -116,6 +116,7 @@ RUN sudo dnf install -y\
              libGL-devel \
              curl-devel \
              openssl-devel \
+             root \
              && yum clean all \
              && rm -rf /var/tmp/yum*
 
