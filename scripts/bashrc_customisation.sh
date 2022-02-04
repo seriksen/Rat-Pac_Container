@@ -5,3 +5,6 @@ alias vim='vi'
 alias la='ls -a --color=auto'
 alias ll='la -l -h --color=auto'
 alias ..='cd ..; ls'
+
+
+source externals/root_install/bin/thisroot.sh
