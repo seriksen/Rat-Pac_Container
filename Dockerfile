@@ -15,6 +15,10 @@ RUN echo "${DOCKER_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER $DOCKER_USER
 WORKDIR /home/${DOCKER_USER}
 
+# See https://www.centos.org/centos-linux-eol/
+RUN sudo sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* \
+    && sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-*
+
 RUN sudo dnf install -y\
              epel-release \
              dnf-plugins-core
