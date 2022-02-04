@@ -26,6 +26,23 @@ cd ${boost_name}
 ./b2 --prefix=${dir}/${boost_name}-install --build-dir=${dir}/${boost_name}-build --with-system --with-thread \
 --with-program_options --with-log --with-filesystem --with-regex install
 
+# ROOT
+sudo yum install epel-release
+sudo yum config-manager --set-enabled powertools
+sudo yum install redhat-lsb-core gcc-gfortran pcre-devel \
+mesa-libGL-devel mesa-libGLU-devel glew-devel ftgl-devel mysql-devel \
+fftw-devel cfitsio-devel graphviz-devel libuuid-devel \
+avahi-compat-libdns_sd-devel openldap-devel python3-numpy \
+libxml2-devel gsl-devel readline-devel qt5-qtwebengine-devel \
+R-devel R-Rcpp-devel R-RInside-devel
+
+dir=${EXTERNALS_BASE}/root
+mkdir -p $dir
+cd ${dir}
+git clone --branch latest-stable https://github.com/root-project/root.git root_src
+mkdir root_build root_install && cd root_build
+cmake -DCMAKE_INSTALL_PREFIX=../root_install ../root_src # && check cmake configuration output for warnings or errors
+cmake --build . -- install -j4 # if you have 4 cores available for compilation
 
 clhep_version=2.4.4.0
 url=https://proj-clhep.web.cern.ch/proj-clhep/dist1/clhep-${clhep_version}.tgz
